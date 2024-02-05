@@ -1,14 +1,11 @@
-import { useState } from "react";
 
-export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
+export default function Signup() {
   return (
     <div className="flex min-h-screen flex-col justify-center px-6 py-12 lg:px-8 bg-gray-900">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-white">
-          Sign in to your account
+          Signup
         </h2>
       </div>
 
@@ -20,8 +17,7 @@ export default function Login() {
             </label>
             <div className="mt-2">
               <input
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+
                 type="email"
                 placeholder="Email"
                 required
@@ -38,8 +34,7 @@ export default function Login() {
             </div>
             <div className="mt-2">
               <input
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+
                 placeholder="Password"
                 type="password"
                 required
@@ -50,7 +45,6 @@ export default function Login() {
 
           <div>
             <button
-              onClick={loginUser}
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
               Sign in
@@ -59,11 +53,11 @@ export default function Login() {
         </form>
 
         <p className="mt-10 text-center text-sm text-gray-500">
-          You don't have an account ?
+          Already have an account ?
           <a
             href="#"
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500 p-2">
-            Register for free Here!
+            Login Here!
           </a>
         </p>
       </div>

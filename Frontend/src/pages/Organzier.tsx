@@ -1,6 +1,6 @@
-import Calender from "./components/Calender";
-import Quote from "./components/Quote";
-import Todos from "./components/Todos";
+import Calender from "../components/Calender";
+import Quote from "../components/Quote";
+import Todos from "../components/Todos";
 
 export default function Organzier() {
   return (
