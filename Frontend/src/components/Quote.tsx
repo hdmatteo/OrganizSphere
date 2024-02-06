@@ -30,16 +30,16 @@ export default function Quote() {
       const data: QuoteData[] = await response.json();
       return data;
     } catch (error) {
-      console.error("Fehler beim Abrufen der Qoutes:", error);
+      console.error("Fehler beim Abrufen der Qoutes", error);
       throw error;
     }
   }
 
   return (
-    <div className="text-white bg-gray-800 rounded-md p-4">
+    <div className="text-white bg-base-200 rounded-md shadow-md p-4 mt-2">
       {quotes.map((quote, index) => (
         <div key={index} className="quote">
-          <p>{quote.quote}</p>
+          <p className="text-gray-800 dark:text-white">{quote.quote}</p>
           <p className=" author text-end text-blue-500">{quote.author}</p>
         </div>
       ))}

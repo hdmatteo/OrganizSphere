@@ -11,7 +11,7 @@ module.exports.saveToDo = async (req, res) => {
   todoModel.create({ text }).then((data) => {
     console.log("Added Succesfully...");
     console.log(data);
-    res.send(data);
+    res.status(201).json({message: 'Todo created'});
   });
 };
 
@@ -25,8 +25,8 @@ module.exports.updateToDo = async (req, res) => {
 
 module.exports.deleteToDo = async (req, res) => {
     const { _id} = req.body;
-    todoModel
+    todoModel 
       .findByIdAndDelete(_id)
       .then(() => res.send("Deleted Sucessfully..."),console.log("deleted succesfull "+_id))
-      .catch((err) => console.log(err));
+      .catch((err) => res.send(err));
   };

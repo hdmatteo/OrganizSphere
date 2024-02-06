@@ -21,7 +21,7 @@ export default function Todos() {
     });
   };
 
-  const deleteTodo = (toDoId) => {
+  const deleteTodo = (toDoId: string) => {
     axios.post(baseUrl + "/deletetodo", { _id: toDoId }).then(({ data }) => {
       console.log(data);
     });
@@ -38,8 +38,8 @@ export default function Todos() {
   }, [createTodo, deleteTodo]);
 
   return (
-    <div className="text-white bg-gray-800 rounded-md p-4 overflow-x-auto">
-      <table className="table">
+    <div className="text-white bg-base-200 rounded-md p-4 shadow-md overflow-x-auto mt-2">
+      <table className="table ">
         <thead>
           <tr>
             <th>
@@ -61,9 +61,8 @@ export default function Todos() {
         </thead>
         <tbody>
           {toDo.map((item) => (
-            <tr key={item._id} text={item.text}>
-              <td>{item.text}</td>
-
+            <tr>
+              <td className="text-gray-800 dark:text-white">{item.text}</td>
               <td>
                 <button onClick={() => deleteTodo(item._id)}>
                   <svg
@@ -72,7 +71,7 @@ export default function Todos() {
                     viewBox="0 0 24 24"
                     stroke-width="1.5"
                     stroke="currentColor"
-                    className="w-5 h-5">
+                    className="w-5 h-5 text-gray-800 dark:text-white">
                     <path
                       stroke-linecap="round"
                       stroke-linejoin="round"
