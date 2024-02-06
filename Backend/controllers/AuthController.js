@@ -15,21 +15,21 @@ module.exports.signup = async (req, res) => {
       })
       .catch((err) => res.send({ message: "Duplicat", err }));
   } catch (err) {
-    res.send(err);
+    res.status().send(err);
   }
 };
 module.exports.login = async (req, res) => {
   const { email, password } = req.body;
   const validUser = await userModel.findOne({ email }).lean();
   if (validUser == null) {
-    res.send({ message: "Does not exist" });
+    res.send({ message: "Does not exist", success: false });
   } else if (await bcryptjs.compareSync(password, validUser.password)) {
     const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const {password: hashedPassword, ...rest} =validUser;
     res.cookie("token", token, { httpOnly: true }).status(200).json(rest);
  
   } else {
-    res.status(401).send({ message: "Wrong Credentials" });
+    res.status(401).send({ message: "Wrong Credentials", success: false });
    
   }
-};
+}; 

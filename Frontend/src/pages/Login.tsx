@@ -1,33 +1,44 @@
 import Lottie from "lottie-react";
 import anmiationData from "../../public/Animationpassword- 1707152047464 (2).json";
-import axios from "axios";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import {
+  loginStart,
+  loginFailure,
+  loginSuccess,
+} from "../redux/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Login() {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
 
-  const  navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const baseUrl = "http://localhost:2105";
-  const handleSubmit = () => {
-    setLoading(true);
-    axios
-      .post(baseUrl + "/login", { email, password })
-      .then(({ data }) => {
-        console.log(data);
-        setLoading(false);
-        setError(false);
-      navigate("/organizer")
-      })
-      .catch(() => {
-        setLoading(false);
-        setError(true);
+  const handleSubmit = async () => {
+    try {
+      dispatch(loginStart());
+      const res = await fetch(baseUrl + "/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
       });
+      const data = await res.json();
+
+      if (data.success === false) {
+        dispatch(loginFailure(data.message));
+        return;
+      } else {
+        navigate("/organizer");
+        dispatch(loginSuccess(data));
+      }
+    } catch (error) {
+      dispatch(loginFailure(error));
+    }
   };
 
   return (
@@ -60,12 +71,16 @@ export default function Login() {
               />
             </div>
             <div className="form-control mt-6">
-              <button onClick={handleSubmit} 
-                disabled={loading} className="btn btn-primary ">{loading ? (
+              <button
+                onClick={handleSubmit}
+                disabled={loading}
+                className="btn btn-primary ">
+                {loading ? (
                   <span className="loading loading-spinner text-neutral"></span>
                 ) : (
                   "Log In"
-                )}</button>
+                )}
+              </button>
             </div>
             <a
               className="font-bold text-blue-500 after:content-['_↗'] ..."
@@ -73,12 +88,14 @@ export default function Login() {
               Sign Up Here
             </a>
             <p className="text-red-400 ">
-              {error && "Something went wrong !!"}
+              {error ? error ||"Something went wrong !!" : ""}
             </p>
           </form>
         </div>
         <div className="text-center  lg:text-left">
-          <h1 className="text-5xl font-bold text-black dark:text-white pl-4">Welcome Back! </h1>
+          <h1 className="text-5xl font-bold text-black dark:text-white pl-4">
+            Welcome Back!{" "}
+          </h1>
         </div>
         <div className="scale-75">
           <Lottie animationData={anmiationData} />
