@@ -1,6 +1,5 @@
 import Lottie from "lottie-react";
 import anmiationData from "../../public/Animationpassword- 1707152047464 (2).json";
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,6 +8,7 @@ import {
   loginSuccess,
 } from "../redux/user/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import Oauth from "../components/Oauth";
 
 export default function Login() {
   const [email, setEmail] = useState<string>();
@@ -74,13 +74,14 @@ export default function Login() {
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className="btn btn-primary ">
+                className="btn btn-primary font-bold ">
                 {loading ? (
                   <span className="loading loading-spinner text-neutral"></span>
                 ) : (
                   "Log In"
                 )}
               </button>
+              <Oauth></Oauth>
             </div>
             <a
               className="font-bold text-blue-500 after:content-['_↗'] ..."

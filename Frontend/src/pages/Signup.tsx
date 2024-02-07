@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Oauth from "../components/Oauth";
 
 export default function Signup() {
   const [userName, setUserName] = useState<string>();
@@ -88,6 +89,7 @@ export default function Signup() {
                   "Sign Up"
                 )}
               </button>
+              <Oauth></Oauth>
             </div>
             <p className="text-red-400 ">
               {error && "Something went wrong !!"}
