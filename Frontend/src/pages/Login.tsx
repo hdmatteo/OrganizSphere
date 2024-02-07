@@ -88,7 +88,7 @@ export default function Login() {
               Sign Up Here
             </a>
             <p className="text-red-400 ">
-              {error ? error ||"Something went wrong !!" : ""}
+              {error ? error || "Something went wrong !!" : ""}
             </p>
           </form>
         </div>
